@@ -1,0 +1,1 @@
+Excercise code for the [JUnit 5 course](https://testautomationu.applitools.com/junit5-tutorial/) on [TestautomationU](https://testautomationu.applitools.com/)
