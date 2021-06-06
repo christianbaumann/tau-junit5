@@ -83,7 +83,7 @@ public class AssertionsTest {
     @Test
     void assertForContainsAnyOrder() {
         List<String> theList = Arrays.asList("firstString", "secondString", "thirdString");
-        
+
         assertThat(theList, Matchers.containsInAnyOrder("firstString", "thirdString", "secondString"));
     }
 }
