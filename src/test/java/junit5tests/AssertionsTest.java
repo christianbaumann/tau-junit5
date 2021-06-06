@@ -1,10 +1,15 @@
 package junit5tests;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssertionsTest {
@@ -47,5 +52,38 @@ public class AssertionsTest {
                         "values were not equal"),
                 () -> assertThrows(NullPointerException.class, null),
                 () -> assertTrue(false, "This boolean condition did not evaluate to true"));
+    }
+
+    @Test
+    void assertForMapTest() {
+        Map<String, Integer> theMap = new HashMap<>();
+        theMap.put("firstKey", 1);
+        theMap.put("secondKey", 2);
+        theMap.put("thirdKey", 3);
+
+        assertThat(theMap, Matchers.hasKey("secondKey"));
+        assertThat(theMap, Matchers.hasValue(2));
+    }
+
+    @Test
+    void assertForList() {
+        List<String> theList = Arrays.asList("firstString", "secondString", "thirdString");
+
+        assertThat(theList, hasItem("thirdStrings"));
+    }
+
+    @Test
+    void assertForAnyOf() {
+        List<String> theList = Arrays.asList("firstString", "secondString", "thirdString");
+
+        // anyOf means "or" - either the first element is in the list, or the second element is in the list.
+        assertThat(theList, Matchers.anyOf(hasItem("thirdString"), hasItem("noString")));
+    }
+
+    @Test
+    void assertForContainsAnyOrder() {
+        List<String> theList = Arrays.asList("firstString", "secondString", "thirdString");
+        
+        assertThat(theList, Matchers.containsInAnyOrder("firstString", "thirdString", "secondString"));
     }
 }
